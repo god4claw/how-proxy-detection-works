@@ -1,51 +1,62 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 404" width="1100" height="404" role="img" aria-label="Схема: браузер → прокси → сайт, две независимые TCP-сессии">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 438" width="1100" height="438" role="img" aria-label="Схема: браузер, exit и сайт — две независимые машины, которые сравнивает антифрод">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/>
     </marker>
     <style>
-      .box { fill: #f6f8fa; stroke: #d0d7de; stroke-width: 1.5; }
-      .ttl { font: 700 16px -apple-system, "Segoe UI", Roboto, Arial, sans-serif; fill: #1f2328; }
-      .txt { font: 400 13px -apple-system, "Segoe UI", Roboto, Arial, sans-serif; fill: #57606a; }
+      .bg { fill: #ffffff; }
+      .card { fill: #f6f8fa; stroke: #d0d7de; stroke-width: 1.5; }
+      .h { font: 700 17px -apple-system, "Segoe UI", Roboto, Arial, sans-serif; fill: #1f2328; }
+      .sub { font: 400 12px -apple-system, "Segoe UI", Roboto, Arial, sans-serif; fill: #6e7781; }
       .mono { font: 400 12.5px ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; fill: #1f2328; }
-      .lbl { font: 600 12.5px -apple-system, "Segoe UI", Roboto, Arial, sans-serif; fill: #57606a; }
-      .bad { fill: #cf222e; }
+      .lbl { font: 600 11.5px -apple-system, "Segoe UI", Roboto, Arial, sans-serif; fill: #6e7781; }
+      .note { font: 400 13px -apple-system, "Segoe UI", Roboto, Arial, sans-serif; fill: #57606a; }
+      .accent { fill: #cf222e; }
+      .good { fill: #1a7f37; }
     </style>
   </defs>
 
-  <rect x="0" y="0" width="1100" height="404" fill="#ffffff"/>
+  <rect class="bg" x="0" y="0" width="1100" height="438"/>
 
-  <rect class="box" x="36" y="72" width="268" height="168" rx="10"/>
-  <text class="ttl" x="60" y="104">Браузер</text>
-  <text class="txt" x="60" y="132">то, что отдаёт JS:</text>
-  <text class="mono" x="60" y="158">UA: Windows 10</text>
-  <text class="mono" x="60" y="180">Client Hints: Windows</text>
-  <text class="mono" x="60" y="202">Canvas: Apple M2</text>
-  <text class="mono" x="60" y="224">TZ: Europe/Moscow</text>
+  <text class="h" x="36" y="44">Две машины, которые сравнивает антифрод</text>
+  <text class="note" x="36" y="68">Прокси режет одно TCP-соединение на два. Сайт видит только вторую машину — exit.</text>
 
-  <rect class="box" x="416" y="72" width="268" height="168" rx="10"/>
-  <text class="ttl" x="440" y="104">Прокси / exit</text>
-  <text class="txt" x="440" y="132">то, что видно в пакетах:</text>
-  <text class="mono bad" x="440" y="158">OS: Linux 6.x</text>
-  <text class="mono bad" x="440" y="180">TTL: 45 · MSS: 1460</text>
-  <text class="mono bad" x="440" y="202">Window: 42340 · WScale: 11</text>
-  <text class="mono bad" x="440" y="224">RTT: 161 ms</text>
+  <!-- ЛЕВАЯ КАРТОЧКА: БРАУЗЕР -->
+  <rect class="card" x="36" y="94" width="282" height="196" rx="10"/>
+  <text class="h" x="60" y="126" style="font-size:16px">Браузер</text>
+  <text class="sub" x="60" y="146">что отдаёт JS:</text>
+  <text class="mono" x="60" y="174">UA, Client Hints</text>
+  <text class="mono" x="60" y="198">Canvas, WebGL, шрифты</text>
+  <text class="mono" x="60" y="222">WebRTC, DNS</text>
+  <text class="mono" x="60" y="246">таймзона, поведение</text>
 
-  <rect class="box" x="796" y="72" width="268" height="168" rx="10"/>
-  <text class="ttl" x="820" y="104">Сайт / антифрод</text>
-  <text class="txt" x="820" y="132">видит только вторую машину:</text>
-  <text class="mono" x="820" y="158">IP: 203.0.113.42 (пример)</text>
-  <text class="mono" x="820" y="180">p0f: Linux, 19 hops</text>
-  <text class="mono" x="820" y="202">JA4T: 42340_2-4-8-1-3_1460_11</text>
-  <text class="mono" x="820" y="224">Akamai: 52d84b11...</text>
+  <!-- СРЕДНЯЯ КАРТОЧКА: EXIT -->
+  <rect class="card" x="409" y="94" width="282" height="196" rx="10"/>
+  <text class="h" x="433" y="126" style="font-size:16px">Exit / прокси</text>
+  <text class="sub" x="433" y="146">что видно в пакетах:</text>
+  <text class="mono" x="433" y="174">initial TTL, окно, опции</text>
+  <text class="mono" x="433" y="198">MSS, MTU, window scale</text>
+  <text class="mono" x="433" y="222">RTT, джиттер, скорость</text>
+  <text class="mono" x="433" y="246">JA4T, QUIC-параметры</text>
 
-  <line x1="304" y1="156" x2="410" y2="156" stroke="#57606a" stroke-width="1.8" marker-end="url(#arrow)"/>
-  <text class="lbl" x="357" y="144" text-anchor="middle">TCP #1</text>
-  <line x1="684" y1="156" x2="790" y2="156" stroke="#57606a" stroke-width="1.8" marker-end="url(#arrow)"/>
-  <text class="lbl" x="737" y="144" text-anchor="middle">TCP #2</text>
+  <!-- ПРАВАЯ КАРТОЧКА: САЙТ -->
+  <rect class="card" x="782" y="94" width="282" height="196" rx="10"/>
+  <text class="h" x="806" y="126" style="font-size:16px">Сайт / антифрод</text>
+  <text class="sub" x="806" y="146">сверяет обе картины:</text>
+  <text class="mono" x="806" y="174">слои совпадают?</text>
+  <text class="mono" x="806" y="198">IP, ASN, PTR, гео</text>
+  <text class="mono" x="806" y="222">репутация и история</text>
+  <text class="mono" x="806" y="246">поведение и аккаунт</text>
 
-  <line x1="36" y1="276" x2="1064" y2="276" stroke="#d0d7de" stroke-width="1" stroke-dasharray="4 4"/>
-  <text class="txt" x="36" y="306">Антифрод сверяет левую и правую колонки. Пока они совпадают — прокси не виден.</text>
-  <text class="txt" x="36" y="330">Как только TTL, порядок TCP-опций, MSS или RTT перестают биться с заявленной ОС и гео — видно всё.</text>
-  <text class="txt" x="36" y="366">p0f/JA4T — подпись того, кто реально держит TCP: для VPN это вы, для прокси — сервер в датацентре.</text>
+  <!-- СТРЕЛКИ -->
+  <line x1="318" y1="192" x2="403" y2="192" stroke="#57606a" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text class="lbl" x="361" y="180" text-anchor="middle">TCP #1</text>
+  <line x1="691" y1="192" x2="776" y2="192" stroke="#57606a" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text class="lbl" x="733" y="180" text-anchor="middle">TCP #2</text>
+
+  <!-- НИЖНИЕ ЗАМЕТКИ -->
+  <line x1="36" y1="318" x2="1064" y2="318" stroke="#d0d7de" stroke-width="1" stroke-dasharray="4 4"/>
+  <text class="note" x="36" y="346">Сайт видит только exit: его TTL, его окно, его порядок TCP-опций, его RTT. UA и Client Hints принадлежат браузеру.</text>
+  <text class="note" x="36" y="372">Пока слои сходятся — прокси невидим. <tspan style="fill:#cf222e">Расхождение между слоями — сигнал, а не сам прокси.</tspan></text>
+  <text class="note" x="36" y="398"><tspan style="fill:#1a7f37">Эталон:</tspan> Windows 11 + Windows-стек. <tspan style="fill:#cf222e">Антипример:</tspan> UA Windows + Linux-стек за датацентром.</text>
 </svg>
