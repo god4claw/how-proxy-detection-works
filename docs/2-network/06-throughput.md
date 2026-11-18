@@ -35,7 +35,7 @@ BDP = bandwidth × RTT        (сколько байт «в пути»)
 ### Источники
 
 - BDP и window/RTT — RFC 7323 (window scaling); Microsoft — [TCP/IP performance tuning](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-tcpip-performance-tuning).
-- Chrome Network Quality Estimator — [Chrome for Developers: Network Quality Estimator](https://developer.chrome.com/docs/capabilities/network-quality) (поля `RTT`, `downlink`, `ECT` в Client Hints).
+- Network Information API — [MDN: `NetworkInformation`](https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation) (`rtt`, `downlink`, `effectiveType`; Chrome отдаёт ту же оценку в Client Hints как `Sec-CH-RTT`/`Sec-CH-Downlink`/`Sec-CH-ECT`).
 - BrowserLeaks `/client-hints`, `/tcp`; ретрансмиты/reordering — [RFC 5681](https://www.rfc-editor.org/rfc/rfc5681) (congestion control).
 
 ---

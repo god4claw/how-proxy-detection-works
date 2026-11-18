@@ -35,7 +35,8 @@
 - Microsoft: [TCP/IP performance tuning — autotuning, окна, RTT, MSS](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-tcpip-performance-tuning).
 - Linux: [ip-sysctl](https://www.kernel.org/doc/html/latest/networking/ip-sysctl.html); `iptables-extensions(8)` — [TTL и TCPMSS](https://man7.org/linux/man-pages/man8/iptables-extensions.8.html); `tc-netem(8)` — [delay/jitter](https://man7.org/linux/man-pages/man8/tc-netem.8.html).
 - WireGuard: [wg-quick(8)](https://git.zx2c4.com/wireguard-tools/plain/src/man/wg-quick.8); OpenVPN: [reference manual, mssfix](https://openvpn.net/community-resources/reference-manual-for-openvpn-2-6/).
-- Chrome: [Headless mode](https://developer.chrome.com/docs/automation-and-testing/headless), [Headless shell](https://developer.chrome.com/docs/automation-and-testing/headless-chrome-shell), [UA Client Hints](https://developer.chrome.com/docs/privacy-security/user-agent-client-hints/), [Network Quality Estimator](https://developer.chrome.com/docs/capabilities/network-quality), [Chromium `user_agent_utils.cc`](https://source.chromium.org/chromium/chromium/src/+/main:components/embedder_support/user_agent_utils.cc).
+- Chrome: [Headless mode](https://developer.chrome.com/docs/automation-and-testing/headless), [Headless shell](https://developer.chrome.com/docs/automation-and-testing/headless-chrome-shell), [UA Client Hints](https://developer.chrome.com/docs/privacy-security/user-agent-client-hints/), [Chromium `user_agent_utils.cc`](https://source.chromium.org/chromium/chromium/src/+/main:components/embedder_support/user_agent_utils.cc).
+- Network Information API (RTT/downlink/ECT) — [MDN `NetworkInformation`](https://developer.mozilla.org/en-US/docs/Web/API/NetworkInformation).
 - Puppeteer: [Headless modes](https://pptr.dev/guides/headless-modes).
 - Cloudflare: [Bot Score](https://developers.cloudflare.com/bots/concepts/bot-score/).
 - Датасеты репутации: [ipinfo Proxy & VPN Detection](https://ipinfo.io/data/proxy-vpn-detection) · [IPQualityScore Proxy Detection](https://www.ipqualityscore.com/documentation/proxy-detection-api/overview) · [MaxMind Anonymous IP](https://www.maxmind.com/en/geoip-anonymous-ip-database) · [Spur Context API](https://docs.spur.us/) · [Spamhaus](https://www.spamhaus.org/).
@@ -44,7 +45,7 @@
 
 - ValdikSS — [Detecting VPN (and its configuration!) and proxy users on the server side](https://medium.com/@ValdikSS/detecting-vpn-and-its-configuration-and-proxy-users-on-the-server-side-1bcc59742413).
 - Intoli — [Detecting Chrome headless](https://intoli.com/blog/not-possible-to-block-chrome-headless/).
-- Krebs on Security — [Residential proxy service 911](https://krebsonsecurity.com/2022/07/a-deep-dive-into-the-residential-proxy-service-911/) · [Aisuru botnet](https://krebsonsecurity.com/2025/10/aisuru-botnet-shifts-from-residential-proxies/).
+- Krebs on Security — [Residential proxy service 911](https://krebsonsecurity.com/2022/07/a-deep-dive-into-the-residential-proxy-service-911/) · [FBI seizure of the Popa botnet / NetNut](https://krebsonsecurity.com/2026/07/fbi-seizes-netnut-proxy-platform-popa-botnet/).
 
 ## Право и этика
 

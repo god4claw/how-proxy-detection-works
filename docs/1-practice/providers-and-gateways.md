@@ -60,7 +60,7 @@
 
 - Типы пулов и телеметрия: [ipinfo Proxy/VPN Detection](https://ipinfo.io/data/proxy-vpn-detection), [IPQualityScore Proxy Detection](https://www.ipqualityscore.com/documentation/proxy-detection-api/overview), [MaxMind Anonymous IP](https://www.maxmind.com/en/geoip-anonymous-ip-database), [Spur Context API](https://docs.spur.us/), [Spamhaus PBL/XBL](https://www.spamhaus.org/).
 - WebRTC/DNS/QUIC-проверки: [BrowserLeaks](https://browserleaks.com/).
-- Про устройство «резидентских» сетей: [Krebs, «A Deep Dive Into the Residential Proxy Service 911»](https://krebsonsecurity.com/2022/07/a-deep-dive-into-the-residential-proxy-service-911/), [Krebs, Aisuru botnet](https://krebsonsecurity.com/2025/10/aisuru-botnet-shifts-from-residential-proxies/).
+- Про устройство «резидентских» сетей: [Krebs, «A Deep Dive Into the Residential Proxy Service 911»](https://krebsonsecurity.com/2022/07/a-deep-dive-into-the-residential-proxy-service-911/), [Krebs, FBI seizure of the Popa botnet / NetNut](https://krebsonsecurity.com/2026/07/fbi-seizes-netnut-proxy-platform-popa-botnet/).
 - Право: [18 U.S.C. §1030](https://www.law.cornell.edu/uscode/text/18/1030), [Computer Misuse Act 1990](https://www.legislation.gov.uk/ukpga/1990/18/contents), [GDPR](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679).
 
 ---
