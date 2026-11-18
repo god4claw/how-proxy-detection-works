@@ -1,0 +1,25 @@
+# SYN, который увидел сервер, когда клиент — Windows 10 за tun2socks
+# Снято 2026-11-18. IP заменены на документационные диапазоны.
+#
+# Клиент: Windows 10 Pro 19045, AmneziaVPN + tun2socks, выход G-Core Labs
+#         (AS199524, Токио). Клиентский curl: time_connect ~2 мс, TTFB ~1.4 с.
+# Сервер: Ubuntu 22.04.5, kernel 5.15.0-198-generic.
+#
+# Команда на сервере:
+#   tcpdump -i any -nn -vvv -s0 'tcp port 9443 and tcp[tcpflags] & tcp-syn != 0'
+#
+# Один SYN (сокращённые поля bpf-вывода):
+
+23:08:19.872582 IP 203.0.113.10.4783 > 198.51.100.20.9443: Flags [S],
+    ttl 44, id 48642, offset 0, flags [DF], proto TCP (6), length 60
+    203.0.113.10.4783 > 198.51.100.20.9443: Flags [S],
+    seq 2012850905, win 42340,
+    options [mss 1460,sackOK,TS val 645810628 ecr 0,nop,wscale 11], length 0
+
+# Разбор:
+#   Initial TTL 64 (наблюдаемый 44 → 20 хопов)
+#   window 42340 = 29 x MSS 1460
+#   wscale 11
+#   options: mss, sackOK, TS, nop, wscale  -> JA4T 42340_2-4-8-1-3_1460_11
+#   Это TCP-подпись антипримера из §11 (BrowserLeaks /tcp), хотя клиент —
+#   Windows. Сервер видит стек выхода туннеля, а не стек клиентской ОС.

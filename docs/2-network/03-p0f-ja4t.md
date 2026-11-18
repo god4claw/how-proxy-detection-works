@@ -19,13 +19,16 @@ p0f (и его современные родственники — Satori, Zarda
 
 | Стек | Initial TTL | Window | WScale | MSS | Порядок опций |
 |---|---|---|---|---|---|
-| Linux 3.11+ (стоковый) | 64 | `29200` (≈ 20 × MSS) | 7 | 1460 | `MSS, SACK, TS, NOP, WS` |
-| Linux (тюнингованный, как в антипримере) | 64 | `42340` | 11 | 1460 | то же |
-| Windows 10/11 (штатный autotuning) | 128 | `64240` | 8 | 1460 | `MSS, NOP, WS, NOP, NOP, SACK_PERM` |
-| Windows (autotuning off / свой тюнинг) | 128 | `65535` или `65464` | 8 | 1460 | то же, без `TIMESTAMP` в SYN |
+| Linux 3.11+ (стоковый) | 64 | `29200` (20 × 1460) | 7 | 1460 | `MSS, SACK, TS, NOP, WS` |
+| Linux (тюнингованный; антипример и выход tun2socks) | 64 | `42340` (29 × 1460) | 11 | 1460 | то же |
+| Windows 10/11 (штатный autotuning) | 128 | `64240` (44 × 1460) | 8 | 1460 | `MSS, NOP, WS, NOP, NOP, SACK_PERM` |
+| Windows 11 в нашем эталоне (наблюдаемое значение) | 128 | `65535` (не кратно 1460) | 8 | 1460 | то же |
+| Windows через AmneziaWG (наш прогон) | 128 | `65464` (49 × 1336) | 8 | 1336 | то же |
 | macOS / iOS | 64 | `65535` | 6 | 1460 | `MSS, NOP, WS, NOP, NOP, TS, SACK_PERM` |
 
-*Почему у Windows два окна: штатный `AutoTuningLevel` даёт масштаб 8 и окно `64240` (44 × 1460), а при выключенном autotuning или ручном тюнинге в SYN уезжает `65535`/`65464`. Именно поэтому таблица из первой версии статьи с «65464–65535» была неполной: современный дефолт — `64240`, а `65535` — это уже конкретная настройка, которую видно на железе.*
+*Почему окно нельзя читать как константу ОС. Почти все значения в таблице кратны MSS: `29200 = 20 × 1460`, `42340 = 29 × 1460`, `64240 = 44 × 1460`, `65464 = 49 × 1336`. Исключения — `65535` у Windows в эталоне и у macOS: они не кратны 1460. Кратность согласуется с тем, что стеки выравнивают анонсируемое окно по MSS, но означает, что «Windows всегда округляет окно вниз до кратного MSS» — неверно как общее правило. И `65464` — не «второй дефолт Windows»: как 49 × MSS оно получается из MSS 1336 (туннель с MTU 1376); при MSS 1460 это не 49 × MSS. Таблица первой версии с диапазоном «65464–65535» смешивала туннель и настройку; проверять нужно SYN на конкретной машине — см. [§11](../4-checks/11-stands.md) и [эксперимент](../../experiments/syn-and-rtt-gap/README.md).*
+
+**Окно и JA4T — не удостоверение личности.** Один и тот же Windows-стек с другим MTU/туннелем даёт другое окно и другой JA4T; Linux с тюнингом окна может совпасть по окну, но выдаст себя порядком опций и `TIMESTAMP`. JA4T помогает кластеризовать соединения и сравнивать их между собой, но не идентифицирует машину или ОС однозначно: совпадение с таблицей не доказывает Windows, расхождение — не доказывает прокси. Живой пример — в [§11](../4-checks/11-stands.md): Windows-клиент за TUN-прокси дал Linux-подпись `42340_2-4-8-1-3_1460_11`.
 
 ## Как читать JA4T и что видно на стендах
 
@@ -37,7 +40,7 @@ p0f (и его современные родственники — Satori, Zarda
 <td width="50%"><a href="../../screenshots/bad/tcp.png"><img src="../../screenshots/bad/tcp.png" alt="Антипример: JA4T 42340_2-4-8-1-3_1460_11, Satori no matches"></a></td>
 </tr>
 <tr>
-<td><b>Эталон.</b> <code>JA4T 65535_2-1-3-1-1-4_1460_8</code>, <code>Satori: Windows 8</code>, <code>Zardaxt: Windows 54%</code>, <code>Initial TTL 128</code>. Окно <code>65535</code> — не «книжный дефолт», а настройка этой машины; порядок опций и отсутствие <code>TIMESTAMP</code> в SYN совпадают с Windows.</td>
+<td><b>Эталон.</b> <code>JA4T 65535_2-1-3-1-1-4_1460_8</code>, <code>Satori: Windows 8</code>, <code>Zardaxt: Windows 54%</code>, <code>Initial TTL 128</code>. Окно <code>65535</code> — не «книжный дефолт», а значение этой конфигурации; порядок опций и отсутствие <code>TIMESTAMP</code> в SYN совпадают с Windows.</td>
 <td><b>Антипример.</b> <code>JA4T 42340_2-4-8-1-3_1460_11</code>, <code>Satori Signature: no matches</code>, <code>Zardaxt: Android 54% / Linux 45% / Windows 21%</code>, <code>Initial TTL 64</code>. При этом <code>User-Agent</code> вверху — Windows. Это и есть p0f-UA mismatch в чистом виде.</td>
 </tr>
 </table>
@@ -60,7 +63,7 @@ p0f (и его современные родственники — Satori, Zarda
 
 В первой версии статьи `no matches` назывался «сам по себе флаг» в §3 и «не аномалия» в §4/§11. Правильная позиция одна: **`no matches` — не флаг.** Это значит «подписи нет в базе», и причин три:
 
-1. **База старая.** В `p0f.fp` вообще нет сигнатуры Windows 10/11: последняя Windows-подпись — Windows 7/8 с окном `8192`. Современная Windows честно даёт `no matches`, и это возраст базы, а не признак прокси.
+1. **База старая.** Последнее обновление `p0f.fp` — 2016 год (p0f 3.09b). Отдельной подписи Windows 10/11 в ней нет: максимум — `Windows 7 or 8` с окном `8192` и общий `Windows: NT kernel` без привязки к версии. Поэтому современная Windows с окном `64240`/`65535` либо попадает в общий «NT kernel», либо — в зависимости от инструмента и порядка матчинга, как Satori у BrowserLeaks — не матчится вовсе. И то, и другое означает «база не знает этот стек», а не «это прокси».
 2. **Стек нестандартный.** Тюнингованные окна, кастомный MSS (туннель), нестандартные опции — всё это «неизвестно» для базы, хотя это нормальная машина ([§4](04-mss-mtu.md)).
 3. **Это действительно прокси** — но установить это можно только по совокупности с UA/Client Hints/поведением, а не по самому факту отсутствия подписи.
 
@@ -71,13 +74,14 @@ p0f (и его современные родственники — Satori, Zarda
 - **IPv6.** p0f поддерживает IPv6, но длина extension-заголовков (`olen`) для IPv6 не считается из-за ограничений libpcap; Satori в открытом виде вообще разбирает только IPv4; JA4T документирован как TCP-SYN-фингерпринт без явной IPv6-специфики. Для dual-stack профилей это отдельная дыра ([§14](../5-gaps/14-ipv6-dualstack.md)).
 - **TLS/HTTP-слой.** p0f ничего не знает про JA4 и Akamai — это отдельные слои ([§7](../3-browser/07-browser-layer.md)).
 - **CDN.** Если сайт за Cloudflare/Akamai, подпись видит CDN, а не бэкенд ([§12](../4-checks/12-scope.md)).
+- **Подпись ≠ личность.** Initial TTL `64`/`128` — частые, но не универсальные значения, и TTL можно переписать. JA4T кластеризует соединения и сравнивает их, но не удостоверяет ОС или машину. Локальный TUN-прокси (tun2socks, Clash) подменяет стек целиком: Windows-клиент за ним даёт Linux-SYN — пример в [§11](../4-checks/11-stands.md).
 - **Сам p0f честно предупреждает:** «treat the output from this tool as advisory; the fingerprinting can be gambled with some minor effort». Это не оракул.
 
 ---
 
 ### Источники
 
-- p0f — [README и семантика `no match`](https://github.com/p0f/p0f/blob/master/docs/README), [p0f.fp](https://github.com/p0f/p0f/blob/master/p0f.fp); JA4T — [FoxIO JA4+](https://github.com/FoxIO-LLC/ja4), [разбор JA4T](https://foxio.io/blog/ja4t-tcp-fingerprinting).
+- p0f — [README и семантика `no match`](https://github.com/p0f/p0f/blob/master/docs/README), [p0f.fp](https://github.com/p0f/p0f/blob/master/p0f.fp) (последнее обновление базы — 2016-05-30, p0f 3.09b); JA4T — [FoxIO JA4+](https://github.com/FoxIO-LLC/ja4), [разбор JA4T](https://foxio.io/blog/ja4t-tcp-fingerprinting).
 - Satori — [github.com/xnih/satori](https://github.com/xnih/satori); Zardaxt — [github.com/NikolaiT/zardaxt](https://github.com/NikolaiT/zardaxt) (метрики relay-классификатора и важность признаков).
 - BrowserLeaks [/tcp](https://browserleaks.com/tcp); RFC 7323 (window scale, timestamps); Microsoft — [TCP/IP performance tuning](https://learn.microsoft.com/en-us/azure/virtual-network/virtual-network-tcpip-performance-tuning).
 

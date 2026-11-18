@@ -7,9 +7,9 @@
 | [§0](00-two-realities.md) | Две реальности | Прокси как два независимых TCP-сегмента; чья подпись у прокси, VPN и MITM |
 | [§1](01-ip-asn.md) | IP и ASN | Теги сети, usage type, PTR, блоклисты, гео и TZ |
 | [§2](02-ttl.md) | TTL | Арифметика хопов; почему подделка TTL не делает Linux Windows |
-| [§3](03-p0f-ja4t.md) | p0f и JA4T | Порядок опций, кластеризация, `no matches` |
+| [§3](03-p0f-ja4t.md) | p0f и JA4T | Порядок опций, окно/MSS, кластеризация, `no matches` |
 | [§4](04-mss-mtu.md) | MSS и MTU | Туннель по размеру сегмента |
-| [§5](05-rtt.md) | RTT | Физика, джиттер, timestamp skew |
+| [§5](05-rtt.md) | RTT | Физика, джиттер, зазор ACK→ClientHello, timestamp skew |
 | [§6](06-throughput.md) | Скорость | Полоса, потери, экономика |
 
 Смежное: IPv6-специфика — в [§14](../5-gaps/14-ipv6-dualstack.md), QUIC — в [§15](../5-gaps/15-http3-quic.md).

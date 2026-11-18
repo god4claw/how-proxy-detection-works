@@ -8,6 +8,7 @@
 - [quic.browserleaks.com](https://quic.browserleaks.com/) — сырые данные QUIC-теста.
 - [test-ipv6.com](https://test-ipv6.com/) — независимая проверка dual-stack.
 - [check.torproject.org/torbulkexitlist](https://check.torproject.org/torbulkexitlist) — список Tor exit-узлов.
+- [Эксперименты](../experiments/README.md) — воспроизводимые измерения к разбору: ACK→ClientHello, захват SYN через TUN-прокси, сырые логи.
 
 ## p0f, Satori, Zardaxt, JA3/JA4
 
@@ -53,6 +54,23 @@
 - Великобритания: [Computer Misuse Act 1990](https://www.legislation.gov.uk/ukpga/1990/18/contents).
 - ЕС: [GDPR, Regulation (EU) 2016/679](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679).
 - ToS и consent: разбирается в материалах Krebs выше; для конкретного провайдера читайте его договор и abuse-политику.
+
+## Версии и даты
+
+Проверено 2026-11-18. «Обновлён» — дата последнего push в репозиторий, а не релиза: у части проектов релизных тегов нет.
+
+| Проект | Состояние на 2026-11-18 |
+|---|---|
+| p0f / `p0f.fp` | 3.09b; последнее изменение `p0f.fp` — 2016-05-30 |
+| JA4/JA4T, FoxIO-LLC/ja4 | репозиторий обновлён 2026-11-17 |
+| Satori, xnih/satori | GPL-2.0; обновлён 2026-09-16 |
+| Zardaxt, NikolaiT/zardaxt | обновлён 2026-09-21; метрики 94.4% / 0.1% — из README, отдельно не воспроизводились |
+| Chrome в стендах | 157.0.8103.79 |
+| Снимки BrowserLeaks | ноябрь 2026 |
+| Захваты SYN | tcpdump 4.99.1, Ubuntu 22.04.5, kernel 5.15.0-198 |
+| Скрипты экспериментов | Python 3.10.12, curl 7.81.0 (сервер) и 8.13.0 (клиент) |
+
+Зачем это в разборе: `no matches` и «неизвестный» JA4T зависят от возраста базы подписей, а сравнение «до/после» без версий бессмысленно. Если вы ссылаетесь на цифры из этого текста, фиксируйте дату — базы и Chrome успеют обновиться.
 
 ## Лицензия
 

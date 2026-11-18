@@ -24,7 +24,7 @@ AmneziaWG:         MTU 1376 в нашем прогоне → MSS 1336
 
 ![BrowserLeaks /tcp через AmneziaWG: MSS 1336 при MTU 1376, initial TTL 128, окно 65464](../../screenshots/tunnel/wg-tcp.png)
 
-*Тот же тест, но браузер выходит через WireGuard (форк AmneziaWG): TCP держит сама Windows. `Initial TTL 128`, окно `65464`, `WScale 8`, порядок опций `MSS, NOP, WINDOW, NOP, NOP, SACK_PERM` — и Zardaxt уверенно ставит Windows (51%). Туннель выдаёт себя одной цифрой: `MSS 1336` вместо 1460. Это MTU 1376 — обфускация AmneziaWG режет MTU сильнее стокового WireGuard (1420 → MSS 1380). Значения MTU зависят от конфигурации, это не «дефолт AmneziaWG» вообще.*
+*Тот же тест, но браузер выходит через WireGuard (форк AmneziaWG): TCP держит сама Windows. `Initial TTL 128`, окно `65464`, `WScale 8`, порядок опций `MSS, NOP, WINDOW, NOP, NOP, SACK_PERM` — и Zardaxt уверенно ставит Windows (51%). Туннель выдаёт себя одной цифрой: `MSS 1336` вместо 1460. Это MTU 1376 — обфускация AmneziaWG режет MTU сильнее стокового WireGuard (1420 → MSS 1380). Окно `65464` здесь — не «дефолт Windows», а 49 × 1336: оно привязано к MSS этого туннеля ([§3](03-p0f-ja4t.md)). И сам MSS 1336 не доказывает именно AmneziaWG: такой же MSS даст любой туннель с MTU 1376; значения MTU зависят от конфигурации, это не «дефолт AmneziaWG» вообще.*
 
 *`Satori Signature: no matches` и `Link Type (p0f): no matches` здесь **не аномалия**: нестандартный MSS просто не попал в базу подписей. Ровно та же история, что с современной Windows в [§3](03-p0f-ja4t.md).*
 
