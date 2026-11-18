@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 404" width="1100" height="404" role="img" aria-label="Схема: браузер → прокси → сайт, две независимые TCP-сессии">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#57606a"/>
+    </marker>
+    <style>
+      .box { fill: #f6f8fa; stroke: #d0d7de; stroke-width: 1.5; }
+      .ttl { font: 700 16px -apple-system, "Segoe UI", Roboto, Arial, sans-serif; fill: #1f2328; }
+      .txt { font: 400 13px -apple-system, "Segoe UI", Roboto, Arial, sans-serif; fill: #57606a; }
+      .mono { font: 400 12.5px ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace; fill: #1f2328; }
+      .lbl { font: 600 12.5px -apple-system, "Segoe UI", Roboto, Arial, sans-serif; fill: #57606a; }
+      .bad { fill: #cf222e; }
+    </style>
+  </defs>
+
+  <rect x="0" y="0" width="1100" height="404" fill="#ffffff"/>
+
+  <rect class="box" x="36" y="72" width="268" height="168" rx="10"/>
+  <text class="ttl" x="60" y="104">Браузер</text>
+  <text class="txt" x="60" y="132">то, что отдаёт JS:</text>
+  <text class="mono" x="60" y="158">UA: Windows 10</text>
+  <text class="mono" x="60" y="180">Client Hints: Windows</text>
+  <text class="mono" x="60" y="202">Canvas: Apple M2</text>
+  <text class="mono" x="60" y="224">TZ: Europe/Moscow</text>
+
+  <rect class="box" x="416" y="72" width="268" height="168" rx="10"/>
+  <text class="ttl" x="440" y="104">Прокси / exit</text>
+  <text class="txt" x="440" y="132">то, что видно в пакетах:</text>
+  <text class="mono bad" x="440" y="158">OS: Linux 6.x</text>
+  <text class="mono bad" x="440" y="180">TTL: 45 · MSS: 1460</text>
+  <text class="mono bad" x="440" y="202">Window: 42340 · WScale: 11</text>
+  <text class="mono bad" x="440" y="224">RTT: 161 ms</text>
+
+  <rect class="box" x="796" y="72" width="268" height="168" rx="10"/>
+  <text class="ttl" x="820" y="104">Сайт / антифрод</text>
+  <text class="txt" x="820" y="132">видит только вторую машину:</text>
+  <text class="mono" x="820" y="158">IP: 203.0.113.42 (пример)</text>
+  <text class="mono" x="820" y="180">p0f: Linux, 19 hops</text>
+  <text class="mono" x="820" y="202">JA4T: 42340_2-4-8-1-3_1460_11</text>
+  <text class="mono" x="820" y="224">Akamai: 52d84b11...</text>
+
+  <line x1="304" y1="156" x2="410" y2="156" stroke="#57606a" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text class="lbl" x="357" y="144" text-anchor="middle">TCP #1</text>
+  <line x1="684" y1="156" x2="790" y2="156" stroke="#57606a" stroke-width="1.8" marker-end="url(#arrow)"/>
+  <text class="lbl" x="737" y="144" text-anchor="middle">TCP #2</text>
+
+  <line x1="36" y1="276" x2="1064" y2="276" stroke="#d0d7de" stroke-width="1" stroke-dasharray="4 4"/>
+  <text class="txt" x="36" y="306">Антифрод сверяет левую и правую колонки. Пока они совпадают — прокси не виден.</text>
+  <text class="txt" x="36" y="330">Как только TTL, порядок TCP-опций, MSS или RTT перестают биться с заявленной ОС и гео — видно всё.</text>
+  <text class="txt" x="36" y="366">p0f/JA4T — подпись того, кто реально держит TCP: для VPN это вы, для прокси — сервер в датацентре.</text>
+</svg>
