@@ -26,7 +26,7 @@
 
 Все скриншоты в разборе — из двух прогонов, а не «из интернета». Это важно: на одном видно, как слои сходятся, на другом — как они расходятся.
 
-![Эталонный прогон /tcp: Windows 11 за Starlink, стек совпадает с UA](screenshots/good/tcp.png)
+![Эталонный прогон /tcp: Windows 11 за Starlink, стек совпадает с UA](screenshots/good/tcp-preview.png)
 
 *Эталон: реальная Windows 11, Chrome 157, Starlink (AS14593). `Initial TTL 128`, окно `65535`, `WS 8`, JA4T `65535_2-1-3-1-1-4_1460_8`; Satori — Windows 8, Zardaxt — Windows 54%.*
 

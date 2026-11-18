@@ -10,6 +10,7 @@ screenshots/
     ip.png
     ip-fingerprint.png
     tcp.png
+    tcp-preview.png   (верхняя часть /tcp для лендинга)
     tls.png
     quic.png
     quic-connection.png
