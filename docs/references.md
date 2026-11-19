@@ -48,13 +48,6 @@
 - Intoli — [Detecting Chrome headless](https://intoli.com/blog/not-possible-to-block-chrome-headless/).
 - Krebs on Security — [Residential proxy service 911](https://krebsonsecurity.com/2022/07/a-deep-dive-into-the-residential-proxy-service-911/) · [FBI seizure of the Popa botnet / NetNut](https://krebsonsecurity.com/2026/07/fbi-seizes-netnut-proxy-platform-popa-botnet/).
 
-## Право и этика
-
-- США: [18 U.S.C. §1030](https://www.law.cornell.edu/uscode/text/18/1030) (Computer Fraud and Abuse Act).
-- Великобритания: [Computer Misuse Act 1990](https://www.legislation.gov.uk/ukpga/1990/18/contents).
-- ЕС: [GDPR, Regulation (EU) 2016/679](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32016R0679).
-- ToS и consent: разбирается в материалах Krebs выше; для конкретного провайдера читайте его договор и abuse-политику.
-
 ## Версии и даты
 
 Проверено 2026-11-18. «Обновлён» — дата последнего push в репозиторий, а не релиза: у части проектов релизных тегов нет.

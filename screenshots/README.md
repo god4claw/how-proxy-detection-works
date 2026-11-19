@@ -59,7 +59,7 @@ screenshots/
 ## Как это снято
 
 - Эталон: обычный браузер на Windows-машине, полностраничные скриншоты, затем кадрирование и замазывание.
-- Антипример: headless Chromium 157 (viewport 1050 px), UA override — так снимались и скриншоты первой версии статьи.
+- Антипример: headless Chromium 157 (viewport 1050 px), UA override.
 - BrowserLeaks © 2011–2026. Снимки приведены как иллюстрация к разбору; при переиспользовании сохраняйте ссылку на [browserleaks.com](https://browserleaks.com/) и подпись.
 
 ---

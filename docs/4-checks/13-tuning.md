@@ -12,7 +12,7 @@
 
 | Профиль | Exit | Что получится |
 |---|---|---|
-| Windows 10/11 | Реальная Windows-машина (свой хост/VPS или хост в сети с явным согласием) | `Initial TTL 128`, окно `64240` (44 × MSS) при штатном autotuning, `65535` при своей настройке; `65464` — только при MSS 1336 (туннель с MTU 1376); `WS 8`; опции `MSS, NOP, WS, NOP, NOP, SACK_PERM`; в SYN нет `TIMESTAMP` |
+| Windows 10/11 | Реальная Windows-машина (свой хост/VPS или контролируемый хост) | `Initial TTL 128`, окно `64240` (44 × MSS) при штатном autotuning, `65535` при своей настройке; `65464` — только при MSS 1336 (туннель с MTU 1376); `WS 8`; опции `MSS, NOP, WS, NOP, NOP, SACK_PERM`; в SYN нет `TIMESTAMP` |
 | Linux / Android | живые Linux и Android-хосты | `Initial TTL 64`, стоковое окно `29200`, `WS 7`, `MSS, SACK, TS, NOP, WS`; тюнингованный — другие окна/WS |
 | macOS / iOS | macOS-хост | `Initial TTL 64`, `65535`, `WS 6`, `TIMESTAMP` в опциях |
 
