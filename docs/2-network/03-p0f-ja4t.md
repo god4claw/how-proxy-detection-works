@@ -34,6 +34,8 @@ p0f (и его современные родственники — Satori, Zarda
 
 Формат JA4T: `<window>_<опции>_<MSS>_<wscale>`, где номера видов: 2 = MSS, 4 = SACK, 8 = TIMESTAMP, 1 = NOP, 3 = WINDOW. Например, `65535_2-1-3-1-1-4_1460_8` = `MSS, NOP, WS, NOP, NOP, SACK_PERM`, окно `65535`, `WS 8`.
 
+**`W8` — это window scale, а не «Windows 8».** Строка, которую BrowserLeaks показывает как `Satori Fingerprint`, — не название ОС, а разобранный SYN: `65535:64:1:60:M1460,S,T,N,W8:.` — окно, TTL, флаги, длина IP-пакета и список опций, где `M1460` — MSS, `S` — SACK, `T` — TIMESTAMP, `N` — NOP, а **`W8` — window scale 8**. Семейство ОС Satori печатает в соседней строке (`Satori Signature`), и она вполне может быть `no matches` или `Android 10.x`. Метка `Windows 8` в наших стендах — это имя профиля в базе Satori, которым он сопоставил живую Windows 11; к токену `W8` она отношения не имеет. Читают путаницу регулярно: `W8` принимают за «Windows 8» и потом ищут противоречие там, где его нет.
+
 <table>
 <tr>
 <td width="50%"><a href="../../screenshots/good/tcp.png"><img src="../../screenshots/good/tcp.png" alt="Эталон: JA4T 65535_2-1-3-1-1-4_1460_8, Satori Windows 8"></a></td>

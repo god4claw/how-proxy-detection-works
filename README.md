@@ -28,7 +28,7 @@
 
 ![Эталонный прогон /tcp: Windows 11 за Starlink, стек совпадает с UA](screenshots/good/tcp-preview.png)
 
-*Эталон: реальная Windows 11, Chrome 157, Starlink (AS14593). `Initial TTL 128`, окно `65535`, `WS 8`, JA4T `65535_2-1-3-1-1-4_1460_8`; Satori — Windows 8, Zardaxt — Windows 54%.*
+*Эталон: реальная Windows 11, Chrome 157, Starlink (AS14593). `Initial TTL 128`, окно `65535`, `WS 8`, JA4T `65535_2-1-3-1-1-4_1460_8`; Satori — `Windows 8` (имя профиля в его базе, к `W8` не относится), Zardaxt — Windows 54%.*
 
 <table>
 <tr><td><b>Параметр</b></td><td><b>Эталон</b></td><td><b>Антипример</b></td></tr>
